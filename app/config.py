@@ -113,13 +113,13 @@ colorlog.escape_codes.escape_codes.update({
 
 logger_settings = {
     'database': 
-        {'color': 'light_green', "indent": 6},
+        {'color': 'green', "indent": 6},
     'service':         
-        {'color': 'light_cyan', "indent": 6},
+        {'color': 'cyan', "indent": 6},
     'generator': 
-        {'color': 'peach', "indent": 4},
+        {'color': 'coral', "indent": 4},
     'ui':
-        {'color': 'dusty_rose', "indent": 2},
+        {'color': 'peach', "indent": 2},
     'main':
         {'color': 'cream', 'indent': 0},
     'default':
