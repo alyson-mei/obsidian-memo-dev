@@ -15,7 +15,7 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 
 # --- Google Gemini ---
-MODEL_NAME = "gemini-2.5-flash-preview-05-20"
+MODEL_NAME = "gemini-2.5-pro"
 MODEL_PROVIDER = "google_genai"
 
 # --- Database ---
@@ -117,7 +117,7 @@ logger_settings = {
     'service':         
         {'color': 'cyan', "indent": 6},
     'generator': 
-        {'color': 'coral', "indent": 4},
+        {'color': 'lavender', "indent": 4},
     'ui':
         {'color': 'peach', "indent": 2},
     'main':

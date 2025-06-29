@@ -9,7 +9,7 @@ Cat as a service: [cataas.com](https://cataas.com/) \
 Tavily Search: [tavily.com](https://www.tavily.com/) \
 AI Model: [Gemini 2.5 Flash Preview 05-20](https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-5-flash)
 
-## saturday, 28 june 2025 | 00:18
+## monday, 30 june 2025 | 02:14
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./time-dark.svg">
   <img src="./time-light.svg" alt="Time Progress">
@@ -24,16 +24,16 @@ started keeping this because days blur together too easily and i want to remembe
 mostly i write for myself, but maybe someone else will find something familiar here—the rhythm of problem-solving, the comfort of mechanical keyboards, the strange intimacy of a city that's learned to pulse with your heartbeat
 welcome to the archive of small revelations 🌙
 
-### 27 jun 2025 
-**ghosts in the data stream 💾**
+### 29 jun 2025 
+the city in my hands 📡
 
-decided to finally tackle the graveyard of old components piled by the corner nest. 2 AM, the city's pulse a distant thrum, and i just needed to clear the space.
+2 am, and the warmth of the thinking mug felt... different tonight. not just the jasmine tea inside. a faint, high-frequency buzz against my palms, a subtle vibration i almost dismissed as tired nerves.
 
-under a tangle of defunct power cables, i found it: an ancient data-pad, scuffed and cracked, a true relic. its screen was a spiderweb. but something about its age, its quiet presence, pulled me in. a surge of that familiar absorption hit, and i jury-rigged a connection to my power supply. a faint pop, then the shattered screen flickered.
+then i saw it. the network diagnostics on my secondary monitor, a massive data spike from a municipal relay lighting up the graph like a silent firework. and the cheap ceramic in my hands pulsed right along with it, a distinct electronic purr that faded in perfect time with the graph's descent. the glaze, the tiny impurities... it's a crude antenna.
 
-instead of an interface, it began projecting. not solid images, but shimmering, ghost-like outlines into the air before my windows. a blurry cityscape, text in a language i didn't recognize, the faint echo of a graph. the neon from the street below caught these ephemeral projections, making them dance and briefly solidify before dissolving again. kiku, curled on a nearby cushion, just twitched an ear, unbothered.
+my little symbol of quiet, of solo walks and solitary thought, has been listening to the city’s chaotic chatter this whole time. kiku, asleep in a nest of discarded cables, didn't even stir. this frequency is just for me.
 
-it felt like the dying device was performing a final, corrupted ballet of its past operations. a silent, accidental history unfolding in the ambient glow of my apartment. what untold stories do these discarded objects hold, just waiting for a final, broken broadcast? 🌃
+all this time i thought this mug was my escape from the noise, but it's just translating it into a language i can feel 🤔
 
 ## weather outside
 Weather in Moscow (2025-06-26, 15:00)
@@ -71,4 +71,4 @@ These mesmerizing formations are found on Lago General Carrera, also known as La
 Visiting the Marble Caves is an unforgettable sensory experience. As you glide through the serene waters by boat or kayak, you'll witness the harmonious blend of vivid blue and white marble, feeling dwarfed by the sheer scale of nature's artistry. The light filtering from above illuminates the cavernous spaces, highlighting the detailed artistry of geological time. The best way to fully appreciate this natural masterpiece is by taking a guided tour, allowing you to navigate deep into the sculpted grottoes and witness their shifting beauty up close. While specific seasons aren't mentioned as optimal, the clear waters and light conditions are key to experiencing their full splendor.
 
 ## cat as a service
-![Cat](https://cataas.com/cat/cute?t=1751059132)
+![Cat](https://cataas.com/cat/cute?t=1751238863)
