@@ -16,7 +16,7 @@ TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 
 # --- Google Gemini ---
 MODEL_NAME = "gemini-2.5-flash"
-MODEL_NAME_PRO = "gemini-2.5-pro"
+MODEL_NAME_PRO = "gemini-2.5-flash"
 MODEL_PROVIDER = "google_genai"
 
 DEFAULT_RESPONSE = "Unable to generate response at this time."
@@ -55,6 +55,8 @@ GITHUB_API_KEY = os.getenv("GITHUB_API_KEY")
 REMOTE_URL = "https://github.com/alyson-mei/obsidian-memo"
 
 # --- General settings ---
+TIMEOUT = 60
+
 NUM_LAST_COMMIT_MSG = 25
 NUM_NEW_COMMIT_MSG = 15
 

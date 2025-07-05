@@ -20,11 +20,9 @@ from pydantic import BaseModel
 from langchain.chat_models import init_chat_model
 from langchain_core.messages import SystemMessage, HumanMessage
 
-from app.config import MODEL_NAME, MODEL_PROVIDER, DEFAULT_RESPONSE, setup_logger
+from app.config import MODEL_NAME, MODEL_PROVIDER, DEFAULT_RESPONSE, TIMEOUT, setup_logger
 
 logger = setup_logger("llm_service", indent=6)
-
-TIMEOUT = 30
 
 async def call_llm(
         system_prompt: str,

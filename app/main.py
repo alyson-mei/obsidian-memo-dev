@@ -714,22 +714,18 @@ async def test_main() -> None:
         # Initialize database
         await init_db()
         logger.info("✓ Database initialized")
-        print("✓ Database initialized")
         
         # Initialize git
         if await initialize_git_repo():
             logger.info("✓ Git repository initialized")
-            print("✓ Git repository initialized")
         else:
             logger.error("✗ Git repository initialization failed")
-            print("✗ Git repository initialization failed")
         
         # Get data
         logger.info("Fetching data...")
         time_info = get_time_info()
         weather_data = await get_weather()
         logger.info("✓ Data fetched successfully")
-        print("✓ Data fetched")
         
         # Generate all message types
         logger.info("Generating all message types...")
@@ -742,33 +738,12 @@ async def test_main() -> None:
             generate_journal_message()
         )
         logger.info("✓ All messages generated successfully")
-        print("✓ Messages generated")
         
         # Update UI
         await state.update_ui()
         logger.info("✓ UI updated successfully")
-        print("✓ UI updated")
-        
-        # Test git operations
-        git_success = await commit_and_push_changes()
-        if git_success:
-            logger.info("✓ Git operations successful")
-            print("✓ Git operations successful")
-        else:
-            logger.error("✗ Git operations failed")
-            print("✗ Git operations failed")
-        
-        # Print results
-        commit_count = await get_commit_count()
-        print(f"\n📊 Results:")
-        print(f"   Time progress: {time_info}")
-        print(f"   Weather data: {weather_data}")
-        print(f"   Current commit: {getattr(state, 'commit_msg', 'N/A')}")
-        print(f"   Total commits: {commit_count}")
-        print(f"   Commits until cleanup: {MAX_COMMITS_BEFORE_REBASE - commit_count}")
-        
+
         logger.info("=== Test is completed ===")
-        print("=== Test is completed ===")
         
     except Exception as e:
         logger.error(f"Test failed: {e}", exc_info=True)
