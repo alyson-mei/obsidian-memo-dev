@@ -1,3 +1,16 @@
+"""
+bing.py
+
+This module provides asynchronous utilities for fetching Bing's image of the day and its metadata
+from the Peapix API, as well as scraping additional details (date, description) from the image's page.
+
+- fetch_description_from_page: Scrapes a Bing image page for date and description using multiple strategies.
+- get_peapix_image: Fetches Bing image metadata and enriches it with scraped details.
+- main: Demonstrates usage and prints the fetched image metadata.
+
+Logging is used throughout for observability. All network requests and parsing steps are robustly handled.
+"""
+
 import asyncio, aiohttp
 from typing import Dict
 from bs4 import BeautifulSoup  # type: ignore

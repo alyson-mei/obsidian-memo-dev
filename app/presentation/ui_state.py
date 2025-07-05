@@ -1,3 +1,29 @@
+"""
+ui_state.py
+
+This module defines the UIState class, which manages the loading, aggregation, and presentation
+of application state for the user interface layer. It coordinates fetching the latest data from
+the database (commits, Bing images, weather, time progress, geo wonders, and journal entries),
+formats this data for display, and renders output files such as the README and SVG resources.
+
+Key features:
+- Asynchronously loads all relevant data from the database using repository patterns.
+- Aggregates and formats state for use in UI templates and resource files.
+- Provides robust logging and error handling for each data source.
+- Supports rendering the main README and writing resource files for the UI.
+- Offers a single update_ui method to refresh all UI outputs in one step.
+- Maintains error state to track and report any issues during data loading or rendering.
+
+Typical usage:
+- Instantiated as a singleton (state) and called by UI update routines or scheduled jobs.
+- Used to keep the UI in sync with the latest generated and stored data.
+
+Dependencies:
+- app.data.repository, app.data.models, app.data.database (for DB operations)
+- app.config (for configuration, paths, and logger setup)
+- Python standard library (datetime, typing)
+"""
+
 from datetime import datetime, timedelta
 from typing import Dict, List
 

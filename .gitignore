@@ -3,9 +3,6 @@ app/presentation/ui/README.md
 app/presentation/ui/time-dark.svg
 app/presentation/ui/time-light.svg
 app/presentation/ui/time.svg
-.dockerignore
-docker-compose.yml
-Dockerfile
 
 # Python
 __pycache__/

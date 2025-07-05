@@ -1,3 +1,31 @@
+"""
+commit_gen.py
+
+This generator module creates unique, expressive commit messages for code repositories,
+drawing inspiration from weather, time of day, mood, and creative references.
+It leverages large language models (LLMs) to generate batches of commit messages that are
+varied, emotionally rich, and often include cultural or atmospheric references.
+
+Key features:
+- Uses LLMs to generate batches of commit messages, with fallback to curated examples on failure.
+- Ensures messages are unique, concise, and include relevant emojis.
+- Incorporates recent commit history, weather data, and time of day to avoid repetition and add context.
+- Provides robust logging and error handling throughout the generation and saving process.
+- Saves generated commit messages to the database in efficient batches, managing table size.
+- Includes a demonstration main function for testing and showcasing the generator.
+
+Typical usage:
+- Invoked as part of an automated workflow to generate commit messages for code pushes.
+- Can be run interactively for inspiration or manual commit crafting.
+
+Dependencies:
+- app.services.llm (for LLM interaction)
+- app.services.part_of_day (for contextual time-of-day info)
+- app.data.database, app.data.repository, app.data.models (for DB operations)
+- app.config (for configuration and logger setup)
+- pydantic (for message schema validation)
+"""
+
 import random
 from datetime import datetime
 from typing import List, Optional

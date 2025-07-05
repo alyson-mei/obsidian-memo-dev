@@ -1,3 +1,18 @@
+"""
+llm.py
+
+This module provides asynchronous utilities for interacting with large language models (LLMs)
+using the LangChain framework. It includes:
+
+- call_llm: Async function to get a basic text response from an LLM with timeout, logging, and fallback.
+- call_llm_structured: Async function to get a structured (Pydantic-validated) response from an LLM,
+  with timeout, logging, and fallback/default handling.
+- main: Demonstrates usage and tests both basic and structured LLM calls.
+
+Logging is used throughout for observability. Configuration is handled via app.config.
+Timeouts and error handling ensure robust operation and predictable fallbacks.
+"""
+
 import asyncio, re, time
 from typing import TypeVar, Type, Optional
 from pydantic import BaseModel
@@ -5,7 +20,7 @@ from pydantic import BaseModel
 from langchain.chat_models import init_chat_model
 from langchain_core.messages import SystemMessage, HumanMessage
 
-from app.config import MODEL_NAME, MODEL_PROVIDER, setup_logger
+from app.config import MODEL_NAME, MODEL_PROVIDER, DEFAULT_RESPONSE, setup_logger
 
 logger = setup_logger("llm_service", indent=6)
 
@@ -18,7 +33,7 @@ async def call_llm(
         model_provider: str = MODEL_PROVIDER,
         temperature: float = 0.7,
         timeout: int = TIMEOUT,
-        default_response: str = "Unable to generate response at this time."
+        default_response: str = DEFAULT_RESPONSE
         ) -> str:
     """
     Call LLM with basic text response.

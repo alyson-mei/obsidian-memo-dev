@@ -1,6 +1,25 @@
+"""
+database.py
+
+Initializes the asynchronous SQLAlchemy database engine, session factory, and declarative base
+for the application. Provides the AsyncSessionLocal for use throughout the app and sets up
+logging for all database connection and session creation events.
+
+Key features:
+- Creates an async SQLAlchemy engine using the DATABASE_URL from configuration.
+- Provides AsyncSessionLocal for dependency injection in async workflows.
+- Defines the declarative Base for model definitions.
+- Logs all major setup steps for observability.
+
+Dependencies:
+- SQLAlchemy (async engine, session, declarative base)
+- app.config (for DATABASE_URL and logger setup)
+"""
+
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+
 from app.config import DATABASE_URL
 from app.config import setup_logger
 

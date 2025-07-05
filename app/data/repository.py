@@ -1,7 +1,26 @@
-import logging
+"""
+repository.py
+
+Implements a generic asynchronous repository pattern for CRUD operations on SQLAlchemy models.
+Provides a BaseRepository class for common operations (create, create_many, get_last, get_last_n,
+delete_by_id, truncate) and a RepositoryFactory for instantiating repositories for specific models.
+
+Key features:
+- Async CRUD operations for any SQLAlchemy model.
+- Batch creation of records with create_many.
+- Table truncation logic to manage table size.
+- Logging for all major operations and errors.
+- Designed for use with async SQLAlchemy sessions.
+
+Dependencies:
+- SQLAlchemy (select, delete, func)
+- app.config (for logger setup)
+"""
+
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 from sqlalchemy import select, delete
+
 from app.config import setup_logger
 
 logger = setup_logger("database", indent=6)

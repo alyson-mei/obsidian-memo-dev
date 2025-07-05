@@ -1,3 +1,22 @@
+"""
+weather.py
+
+This module provides asynchronous utilities for fetching, parsing, and summarizing weather data
+from external APIs. Only Freeweather and Tomorrow.io are supported for now, because every API
+has its own return format, and some of them can be too long for LLM. 
+Other APIs can be added if needed by extending app/services/weather.py and app/config.py.
+
+The module includes:
+
+- WEATHER_CODES: Mapping of weather codes to human-friendly text and emoji.
+- extract_weather_summary: Function to extract and normalize weather data.
+- get_weather_call: Async function to fetch weather data with retries and timeout.
+- get_weather: Async function to get weather data with fallback handling.
+- get_fallback_weather: Provides fallback data if the API is unavailable.
+
+Logging is used throughout for observability. Configuration is handled via app.config.
+"""
+
 import aiohttp, asyncio
 from typing import Optional, Dict, Any
 
@@ -5,7 +24,6 @@ from app.config import WEATHER_API, WEATHER_URL
 from app.config import setup_logger
 
 logger = setup_logger("weather_service", indent=6)
-
 
 WEATHER_CODES = {
     "0": {"text": "Unknown", "emoji": "❓"},
@@ -89,7 +107,7 @@ def get_fallback_weather() -> Dict[str, Any]:
     """Return fallback weather data when API fails."""
     return {
         "status": "unavailable",
-        "message": "Weather data temporarily unavailable ❓",
+        "message": "Weather data temporarily unavailable",
         "current": {
             "temp_c": None,
             "condition": "Unknown"

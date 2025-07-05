@@ -1,3 +1,29 @@
+"""
+weather_gen.py
+
+This generator module creates human-friendly weather messages using large language models (LLMs).
+It takes structured weather data and the current part of day, crafts a prompt, and uses an LLM to generate
+a concise, expressive weather summary with a moody reflection. The result is saved to the database for use
+in dashboards, journals, or other features.
+
+Key features:
+- Adapts output to the available weather data, omitting irrelevant or missing fields.
+- Uses natural, interpretive language and emojis for clarity and emotional tone.
+- Adds a short, introspective weather reflection tailored to the day's conditions.
+- Integrates with the database: saves new weather messages and manages table size with truncation.
+- Provides robust logging and error handling throughout the process.
+
+Typical usage:
+- Called by scheduled jobs or user actions to keep weather summaries up to date.
+- Can be run as a standalone script for demonstration or testing.
+
+Dependencies:
+- app.services.llm (for LLM interaction)
+- app.services.part_of_day (for contextual time-of-day info)
+- app.data.database, app.data.repository, app.data.models (for DB operations)
+- app.config (for configuration and logger setup)
+"""
+
 from datetime import datetime
 
 from app.services.llm import call_llm

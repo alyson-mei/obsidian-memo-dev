@@ -1,3 +1,27 @@
+"""
+bing_gen.py
+
+This generator module is responsible for creating Bing image messages for the application.
+It fetches the Bing image of the day and its metadata (such as title, description, date, and copyright)
+from the Peapix API using the async service layer. The generator then saves the resulting image data
+to the database for later use in dashboards, journals, or other features.
+
+Key features:
+- Asynchronous fetching of Bing image metadata and description.
+- Robust logging for each step of the process, including error handling.
+- Database integration: saves new Bing image messages and manages table size with truncation.
+- Returns a dictionary with all relevant Bing image data, even if fetching or saving fails.
+
+Typical usage:
+- Called by scheduled jobs or user actions to keep the Bing image feed up to date.
+- Can be run as a standalone script for testing or demonstration.
+
+Dependencies:
+- app.services.bing (for Peapix API access)
+- app.data.database, app.data.repository, app.data.models (for DB operations)
+- app.config (for logger setup)
+"""
+
 from app.services.bing import get_peapix_image
 from app.data.database import AsyncSessionLocal
 from app.data.repository import RepositoryFactory

@@ -15,8 +15,11 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 
 # --- Google Gemini ---
-MODEL_NAME = "gemini-2.5-pro"
+MODEL_NAME = "gemini-2.5-flash"
+MODEL_NAME_PRO = "gemini-2.5-pro"
 MODEL_PROVIDER = "google_genai"
+
+DEFAULT_RESPONSE = "Unable to generate response at this time."
 
 # --- Database ---
 DATABASE_URL = "sqlite+aiosqlite:///app/data/app.db"

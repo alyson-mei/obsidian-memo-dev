@@ -1,0 +1,19 @@
+version: '3.8'
+
+services: 
+  app:
+    build:  .
+    container_name: obsidian_container
+    
+    volumes:
+      - ./app/data:/usr/src/app/app/data
+      - ./app/presentation/ui:/usr/src/app/app/presentation/ui
+      - ${REPO_DIR}:/vaults
+    
+    environment:
+      - REPO_DIR=/vaults
+
+    env_file:
+      - .env
+
+    tty: true

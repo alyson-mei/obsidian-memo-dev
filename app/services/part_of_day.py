@@ -1,3 +1,12 @@
+"""
+part_of_day.py
+
+Provides a utility for mapping an hour of the day (0-23) to a human-friendly part-of-day description.
+Includes logging for observability.
+
+- get_part_of_day_description: Returns a string label for the given hour.
+"""
+
 from app.config import setup_logger
 
 logger = setup_logger("part_of_day_service", indent=6)

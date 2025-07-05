@@ -1,5 +1,24 @@
+"""
+models.py
+
+Defines all SQLAlchemy ORM models for the application's database tables, including Commit, Weather,
+Time, Geo, Bing, and Journal. Each model specifies its table name, columns, and types, and includes
+a timestamp column that is automatically updated on modification.
+
+Key features:
+- Declarative model definitions for all major data entities.
+- Consistent use of primary keys, autoincrement, and indexing.
+- Timestamp columns for tracking updates.
+- Designed for use with async SQLAlchemy sessions.
+
+Dependencies:
+- SQLAlchemy (Column, Integer, DateTime, Text, func)
+- app.data.database (for declarative Base)
+"""
+
 from sqlalchemy import Column, Integer, DateTime, Text
 from sqlalchemy.sql import func
+
 from app.data.database import Base
 
 class Commit(Base):

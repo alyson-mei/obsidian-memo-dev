@@ -1,3 +1,28 @@
+"""
+journal_gen.py
+
+This generator module creates creative journal and event entries for a character named Elizabeth (Liz)
+in a cyberpunk setting. It leverages LLMs to generate realistic, contemplative, and original first-person
+narratives and event vignettes, drawing on a rich character profile, recent entries, and curated examples.
+
+Key features:
+- Uses LLMs to generate both event and journal entries, each with distinct prompts and style guidelines.
+- Incorporates character profile, signature items, rituals, and recent history to ensure continuity and depth.
+- Avoids repetition and cliché by referencing recent entries and providing explicit negative examples.
+- Enforces strict formatting, tone, and content rules to maintain narrative quality and authenticity.
+- Saves generated entries to the database, managing table size with truncation.
+- Provides robust logging and error handling throughout the process.
+
+Typical usage:
+- Invoked by scheduled jobs or user actions to keep a narrative journal up to date.
+- Can be run as a standalone script for demonstration or creative inspiration.
+
+Dependencies:
+- app.services.llm (for LLM interaction), using pro model here
+- app.data.database, app.data.repository, app.data.models (for DB operations)
+- app.config (for configuration and logger setup)
+"""
+
 import asyncio
 from typing import Literal
 
@@ -5,7 +30,7 @@ from app.services.llm import call_llm
 from app.data.repository import RepositoryFactory
 from app.data.models import Journal
 from app.data.database import AsyncSessionLocal
-from app.config import NUM_LAST_JOURNAL_MSG, setup_logger
+from app.config import NUM_LAST_JOURNAL_MSG, MODEL_NAME_PRO, setup_logger
 
 logger = setup_logger("journal_generator", indent=4)
 
@@ -204,17 +229,10 @@ Think about what makes a moment worth capturing. The best events have an underly
 - **Explaining the interesting idea explicitly** - let it emerge through action and detail
 """
 
-night_entry_prompt = """
+journal_system_prompt = """
 # Role: you are an AI assistat helping to generate a journal entry for a character named Elizabeth (Liz) in a cyberpunk setting. Your task is to create a realistic, contemplative, first-person narrative that reflects her personality, environment, and interests.
 
-# Night Entry Generation Workflow
-
-## CRITICAL WARNINGS
-**DO NOT COPY OR STEAL IDEAS FROM THE EXAMPLE. YOU WILL BE SHUT DOWN IF YOU REPEAT OR TEMPLATE MATCH. BE CREATIVE AND ORIGINAL.**
-
-**DO NOT USE CLICHÉ PHRASES LIKE "CLICK-CLACK," "TACK-TACK," OR OVERUSE "HUM." YOU WILL BE TERMINATED FOR LAZY WRITING.**
-
-**DO NOT WRITE "TWO AM" OR OTHER OVERLY WRITTEN TIME FORMATS. USE "2 AM" OR YOU WILL BE REPLACED.**
+# Journal Entry Generation Workflow
 
 ## Character Context
 **You are Elizabeth (Liz)** - a cyberpunk coder in her natural element during late night hours. Night owl programmer with neon-lit apartment, coding setup, and Kiku (redhead cat). Items include pale blue "Thinking Mug," Lazarus (pothos plant), vintage mechanical keyboard.
@@ -245,7 +263,6 @@ Come up with a different reflection each time, avoid repetition.
 - Pretentious words: "ethereal," "symphony"
 - Cliché sounds: "click-clack," "tack-tack"
 - Overly written time formats: "two am" (use: "2 AM")
-- AND OTHER SUCH STUFF!!! IDENTIFY THEM BEFORE WRITING!!! JUST DON'T USE SINGLE WORDS REPRESENTING SOUNDS!!!
 
 **Use:**
 - Simple, direct language with occasional technical precision
@@ -295,20 +312,30 @@ async def generate_journal_message(update: bool = True):
 
     recent_events = await get_recent_entries(entry="event")
     recent_journals = await get_recent_entries(entry="journal")
-    
+
     human_prompt = f"""
     Profile: {elizabeth_profile}
     Events examples: {events_examples}
     Recent entries: {recent_events}
     """
-    response_event = await call_llm(events_system_prompt, human_prompt, temperature=1.0)
+    response_event = await call_llm(
+        events_system_prompt,
+        human_prompt,
+        temperature=1.0,
+        model=MODEL_NAME_PRO
+        )
 
     human_prompt = f"""
     Profile: {elizabeth_profile}
     Current event: {response_event}
     Recent entries: {recent_journals}
     """
-    response_journal = await call_llm(night_entry_prompt, human_prompt, temperature=0.7)
+    response_journal = await call_llm(
+        journal_system_prompt,
+        human_prompt,
+        temperature=0.7,
+        model=MODEL_NAME_PRO
+        )
     
     if update:
         logger.info(f"Saving journal message to database")

@@ -1,3 +1,30 @@
+"""
+geo_gen.py
+
+This generator module creates engaging messages about the world's most breathtaking natural wonders.
+It combines LLM-powered query generation, Tavily search results, and LLM-crafted descriptions to produce
+a compelling narrative and select the best available images for each place.
+
+Key features:
+- Generates a unique, concise search query for a new natural wonder not previously used.
+- Performs a Tavily search to gather text and image results about the selected place.
+- Formats and summarizes search results, then prompts an LLM to write an inspiring, fact-based description.
+- Selects and validates the best available images, prioritizing quality and relevance.
+- Saves the generated message and image(s) to the database, managing table size with truncation.
+- Provides robust logging and error handling throughout the process.
+
+Typical usage:
+- Invoked by scheduled jobs or user actions to enrich a feed of natural wonders.
+- Can be run as a standalone script for demonstration or testing.
+
+Dependencies:
+- app.services.search (for Tavily search)
+- app.services.llm (for LLM interaction), using pro model here
+- app.data.database, app.data.repository, app.data.models (for DB operations)
+- app.config (for configuration and logger setup)
+- pydantic (for message schema validation)
+"""
+
 import asyncio, aiohttp
 from pydantic import BaseModel, Field
 
@@ -6,7 +33,7 @@ from app.data.models import Geo
 from app.data.repository import RepositoryFactory
 from app.services.search import tavily_search
 from app.services.llm import call_llm, call_llm_structured
-from app.config import NUM_LAST_SEARCH_MSG, setup_logger
+from app.config import NUM_LAST_SEARCH_MSG, MODEL_NAME_PRO, setup_logger
 
 logger = setup_logger("geo_generator", indent=4)
 
@@ -286,7 +313,12 @@ async def generate_geo_message():
         last_n_places = ""
 
     search_human_prompt = f"Already used: \n {last_n_places}"
-    query = await call_llm(search_system_prompt, search_human_prompt, default_response="")
+    query = await call_llm(
+        search_system_prompt,
+        search_human_prompt,
+        default_response="",
+        model=MODEL_NAME_PRO
+        )
     
     if not query:
         logger.error("Failed to generate search query")
@@ -341,7 +373,8 @@ async def generate_geo_message():
         message_system_prompt, 
         message_human_prompt, 
         response_model=GeoMessage,
-        default_factory=default_geo_message
+        default_factory=default_geo_message,
+        model=MODEL_NAME_PRO
     )
 
     # Debug: Log the raw response to see what the LLM returned

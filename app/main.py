@@ -1,3 +1,33 @@
+"""
+main.py
+
+This is the main entry point for the application. It orchestrates the scheduling, generation,
+and updating of all dynamic content, including commit messages, weather summaries, time progress
+charts, Bing images, geo wonders, and journal entries. It also manages git operations to keep
+the repository and README up to date.
+
+Key features:
+- Initializes the database and git repository on startup.
+- Schedules and runs all generator modules at configurable intervals.
+- Handles copying generated files (README, SVGs) into the repository.
+- Commits and pushes changes to the remote git repository, with support for force-push and history cleanup.
+- Provides robust logging and error handling for all major operations.
+- Supports both continuous operation and a test mode for single-cycle runs.
+- Aggregates and updates UI state for presentation.
+
+Typical usage:
+- Run as the main process to keep the repository and README in sync with generated content.
+- Can be run in test mode for development and debugging.
+
+Dependencies:
+- app.generators.* (for all content generators)
+- app.services.* (for data and utility services)
+- app.data.* (for database and repository operations)
+- app.presentation.ui_state (for UI state aggregation)
+- app.config (for configuration and logger setup)
+- Python standard library (asyncio, shutil, os, datetime, typing, pathlib)
+"""
+
 import asyncio
 import shutil
 import os
@@ -171,7 +201,7 @@ async def copy_files_to_repo():
             logger.warning(f"Time light SVG not found at {TIME_LIGHT_SVG_PATH}")
 
         if files_copied:
-            logger.info(f"Files copied to repository: {', '.join(files_copied)}")
+            logger.info(f"Copied to repository: {', '.join(files_copied)}")
         else:
             logger.warning("No files found to copy - check your file paths in config")
         
@@ -704,11 +734,11 @@ async def test_main() -> None:
         # Generate all message types
         logger.info("Generating all message types...")
         await asyncio.gather(
-            #generate_time_message(time_info),
-            #generate_weather_message(weather_data),
-            #generate_and_save_commit_messages(weather_data),
-            #generate_bing_message(),
-            #generate_geo_message(),
+            generate_time_message(time_info),
+            generate_weather_message(weather_data),
+            generate_and_save_commit_messages(weather_data),
+            generate_bing_message(),
+            generate_geo_message(),
             generate_journal_message()
         )
         logger.info("✓ All messages generated successfully")
@@ -737,8 +767,8 @@ async def test_main() -> None:
         print(f"   Total commits: {commit_count}")
         print(f"   Commits until cleanup: {MAX_COMMITS_BEFORE_REBASE - commit_count}")
         
-        logger.info("=== Test completed successfully ===")
-        print("=== Test completed successfully ===")
+        logger.info("=== Test is completed ===")
+        print("=== Test is completed ===")
         
     except Exception as e:
         logger.error(f"Test failed: {e}", exc_info=True)

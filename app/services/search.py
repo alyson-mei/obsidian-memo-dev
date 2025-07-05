@@ -1,3 +1,16 @@
+"""
+search.py
+
+This module provides asynchronous utilities for performing web searches using the Tavily API.
+It includes:
+
+- tavily_search: Async function to perform a search with flexible parameters and robust error handling.
+- main: Example usage and demonstration of the search function.
+
+Logging is used throughout for observability. Configuration is handled via app.config.
+The search function always returns a consistent dictionary structure, even on error.
+"""
+
 import asyncio, json
 from typing import Any, Dict, Optional
 

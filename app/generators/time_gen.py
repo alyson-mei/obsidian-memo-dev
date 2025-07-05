@@ -1,3 +1,27 @@
+"""
+time_gen.py
+
+This generator module creates SVG progress bar charts visualizing the progress of various time periods
+(day, week, month, season, year) based on the current local time. It generates both light and dark mode
+SVGs, then saves them to the database for use in dashboards, journals, or other features.
+
+Key features:
+- Calculates time progress percentages for day, week, month, season, and year.
+- Generates visually appealing horizontal bar charts in SVG format for both light and dark themes.
+- Integrates with the database: saves new time progress messages and manages table size with truncation.
+- Provides robust logging and error handling throughout the process.
+
+Typical usage:
+- Called by scheduled jobs or user actions to keep time progress visualizations up to date.
+- Can be run as a standalone script for demonstration or testing.
+
+Dependencies:
+- matplotlib (for SVG chart generation)
+- app.resources.styles (for fonts and color schemes)
+- app.data.database, app.data.repository, app.data.models (for DB operations)
+- app.config (for logger setup)
+"""
+
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 from io import BytesIO

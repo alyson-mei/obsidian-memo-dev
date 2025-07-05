@@ -1,3 +1,18 @@
+"""
+time.py
+
+This module provides utilities for calculating and describing time progress
+across various periods (day, week, month, season, year). It includes:
+
+- get_days_in_month: Returns the number of days in a given month/year.
+- get_season_range: Determines the start and end dates of the current meteorological season.
+- get_start_of_next_year: Returns a datetime for the start of the next year.
+- get_time_info: Calculates progress percentages and labels for day, week, month, season, and year.
+
+Logging is used for observability. All calculations use the current local time.
+Includes an extensive __main__ section for edge case testing and demonstration.
+"""
+
 import calendar
 from datetime import datetime, timedelta
 from typing import Dict, Tuple, Union
